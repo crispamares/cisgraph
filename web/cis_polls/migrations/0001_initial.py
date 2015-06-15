@@ -13,14 +13,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Answer',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
                 ('percent', models.SmallIntegerField()),
             ],
         ),
         migrations.CreateModel(
             name='Choice',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
                 ('answer_int', models.SmallIntegerField()),
                 ('answer_text', models.CharField(max_length=200)),
                 ('is_nsnc', models.BooleanField(default=False)),
@@ -29,19 +29,19 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Facet',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
                 ('kind', models.CharField(max_length=50)),
                 ('value', models.SmallIntegerField()),
                 ('facet_text', models.CharField(max_length=200)),
                 ('is_total', models.BooleanField(default=False)),
-                ('sample', models.PositiveIntegerField(verbose_name=b'N')),
+                ('sample', models.PositiveIntegerField(verbose_name='N')),
             ],
         ),
         migrations.CreateModel(
             name='Poll',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('kind', models.CharField(max_length=50, unique_for_date=b'date')),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
+                ('kind', models.CharField(unique_for_date='date', max_length=50)),
                 ('poll_name', models.CharField(max_length=200)),
                 ('date', models.DateField()),
                 ('cis_study_id', models.SmallIntegerField()),
@@ -50,10 +50,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Question',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
                 ('kind', models.CharField(max_length=50)),
                 ('question_text', models.CharField(max_length=200)),
-                ('sample', models.PositiveIntegerField(verbose_name=b'N')),
+                ('sample', models.PositiveIntegerField(verbose_name='N')),
                 ('poll', models.ForeignKey(to='cis_polls.Poll')),
             ],
         ),

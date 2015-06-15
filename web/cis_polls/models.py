@@ -9,12 +9,18 @@ class Poll(models.Model):
     date = models.DateField()
     cis_study_id = models.SmallIntegerField()
 
+    def __str__(self):
+        return self.poll_name
+
 
 class Question(models.Model):
     poll = models.ForeignKey(Poll)
     kind = models.CharField(max_length=50)  # AutoUbicacion, ...
     question_text = models.CharField(max_length=200)
     sample = models.PositiveIntegerField('N')
+
+    def __str__(self):
+        return self.kind + " -- " + self.poll.poll_name
 
 
 class Choice(models.Model):
@@ -25,6 +31,9 @@ class Choice(models.Model):
     answer_int = models.SmallIntegerField()
     answer_text = models.CharField(max_length=200)
     is_nsnc = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.answer_text + " -- " + str(self.answer_int)
 
 
 class Facet(models.Model):
@@ -42,12 +51,14 @@ class Facet(models.Model):
 class Answer(models.Model):
     question = models.ForeignKey(Question)
     choice = models.ForeignKey(Choice)
-    percent = models.SmallIntegerField()
-    facet = models.ForeignKey(Facet, blank=True)
+    percent = models.FloatField()
+    facet = models.ForeignKey(Facet, null=True, blank=True)
 
     def is_multi(self):
         return bool(self.facet)
 
+    def __str__(self):
+        return str(self.choice.answer_text) + " -- " + str(self.percent)
 
 
 # class AvAutoUbicacion(models.Model):

@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+import cis_polls.urls as cis_polls_urls
 
 urlpatterns = [
+    url(r'^promoted/', include(cis_polls_urls)),
     url(r'^admin/', include(admin.site.urls)),
 ]
